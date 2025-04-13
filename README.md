@@ -6,13 +6,13 @@ An empathetic and interactive AI Therapist mobile app designed to support emotio
 
 ##  Key Features
 
-**AI-Powered Conversations**: Chat with a supportive AI trained for empathetic listening.
-**Mental Health Assessments**: Includes PHQ-9 and WHO-5 tests with visual progress tracking.
-**Sentiment & Emotion Analysis**: Real-time mood detection using NLP.
-**Guided Meditation & Breathing**: Personalized exercises to help manage stress and anxiety.
-**Speech-to-Text Journaling**: Voice input for reflective journaling experiences.
-**Daily Check-ins**: Consistent mood and activity tracking for self-awareness.
-**Dashboard Personalization**: Displays user name, profile photo, and recent activities.
+- **AI-Powered Conversations**: Chat with a supportive AI trained for empathetic listening.
+- **Mental Health Assessments**: Includes PHQ-9 and WHO-5 tests with visual progress tracking.
+- **Sentiment & Emotion Analysis**: Real-time mood detection using NLP.
+- **Guided Meditation & Breathing**: Personalized exercises to help manage stress and anxiety.
+- **Speech-to-Text Journaling**: Voice input for reflective journaling experiences.
+- **Daily Check-ins**: Consistent mood and activity tracking for self-awareness.
+- **Dashboard Personalization**: Displays user name, profile photo, and recent activities.
 
 ---
 
