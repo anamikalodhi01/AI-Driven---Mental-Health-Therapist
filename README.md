@@ -16,7 +16,7 @@ An empathetic and interactive AI Therapist mobile app designed to support emotio
 
 ---
 
-## 🛠️ Tech Stack
+##  Tech Stack
 
 | Layer        | Tools/Frameworks                              |
 |--------------|-----------------------------------------------|
