@@ -33,7 +33,7 @@ An empathetic and interactive AI Therapist mobile app designed to support emotio
 
 ```bash
 # 1. Clone the repo
-git clone https://github.com/anamikalodhi01/AI-Driven---Mental-Health-Therapist.git
+git clone https://github.com/anamikalodhi01/AI-Driven-Mental-Health-Therapist.git
 cd AI-Therapist
 
 # 2. Install dependencies
