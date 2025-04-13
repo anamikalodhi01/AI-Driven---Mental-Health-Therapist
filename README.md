@@ -1,6 +1,6 @@
 # AI-Driven-Mental-Health-Therapist
 
-An empathetic and interactive AI Therapist mobile app designed to support emotional wellness, mental health assessments, and personal reflection — all from the comfort of your phone. Built with **React Native**, powered by **AI/NLP models**, and secured with **Firebase Authentication**.
+An empathetic and interactive AI Therapist mobile app designed to support emotional wellness, mental health assessments, and personal reflection — all from the comfort of your phone. Built with **React Native**, powered by **AI/NLP models**, and secured with **JSON Authentication**.
 
 ---
 
@@ -23,7 +23,7 @@ An empathetic and interactive AI Therapist mobile app designed to support emotio
 | Frontend     | React Native (Expo)                           |
 | Backend      | Node.js, Express.js                           |
 | Database     | MongoDB                                       |
-| Auth         | Json Authentication                           |
+| Auth         | JSON Authentication                           |
 | AI/NLP       | Hugging Face Transformers, Custom ML models   |
 | UI/UX        | Figma (Design), Custom greenish-brown theme   |
 
