@@ -1,273 +1,304 @@
-// import React from 'react';
-// import { View, Text, StyleSheet, Image, TouchableOpacity, ScrollView } from 'react-native';
-// import { useRouter } from 'expo-router';
+ import React, { useState } from 'react';
+ import { useRouter } from 'expo-router';
+ const router = useRouter();
 
-// const Dashboard = () => {
-//   const router = useRouter();
+import {
+  View,
+  Text,
+  Image,
+  StyleSheet,
+  TouchableOpacity,
+  ScrollView,
+} from 'react-native';
+import { Ionicons, Feather, FontAwesome5 } from '@expo/vector-icons';
 
-//   return (
-//     <ScrollView contentContainerStyle={styles.container}>
-//       <View style={styles.header}>
-//         <Image source={require('../assets/Anamika (1).png')} style={styles.avatar} />
-//         <Text style={styles.greeting}>Welcome back, <Text style={styles.name}>Aarav</Text> 👋</Text>
-//       </View>
+const Dashboard: React.FC = () => {
+  const [selectedMood, setSelectedMood] = useState<string | null>(null);
 
-//       <View style={styles.cardContainer}>
-//         <TouchableOpacity style={styles.card} onPress={() => router.push('/assessment')}>
-//           <Text style={styles.cardTitle}>📝 Self Assessment</Text>
-//           <Text style={styles.cardText}>Check your current mental health state</Text>
-//         </TouchableOpacity>
+  const moods = [
+    { icon: require('../assets/red.png'), label: 'Sad' },
+    { icon: require('../assets/orange.png'), label: 'Anxious' },
+    { icon: require('../assets/grey.png'), label: 'Neutral' },
+    { icon: require('../assets/green.png'), label: 'Happy' },
+    { icon: require('../assets/green2.png'), label: 'Excited' },
+  ];
 
-//         <TouchableOpacity style={styles.card} onPress={() => router.push('/chat')}>
-//           <Text style={styles.cardTitle}>💬 AI Chat Therapy</Text>
-//           <Text style={styles.cardText}>Talk to your AI therapist</Text>
-//         </TouchableOpacity>
-
-//         <TouchableOpacity style={styles.card} onPress={() => router.push('/meditation')}>
-//           <Text style={styles.cardTitle}>🧘‍♀️ Meditation</Text>
-//           <Text style={styles.cardText}>Relax with guided exercises</Text>
-//         </TouchableOpacity>
-
-//         <TouchableOpacity style={styles.card} onPress={() => router.push('/journal')}>
-//           <Text style={styles.cardTitle}>📖 Mood Journal</Text>
-//           <Text style={styles.cardText}>Track your emotions and thoughts</Text>
-//         </TouchableOpacity>
-//       </View>
-//     </ScrollView>
-//   );
-// };
-
-// export default Dashboard;
-
-// const styles = StyleSheet.create({
-//   container: {
-//     flexGrow: 1,
-//     backgroundColor: '#FAF7F2',
-//     padding: 20,
-//     paddingTop: 50,
-//   },
-//   header: {
-//     flexDirection: 'row',
-//     alignItems: 'center',
-//     marginBottom: 30,
-//   },
-//   avatar: {
-//     width: 60,
-//     height: 60,
-//     borderRadius: 30,
-//     marginRight: 15,
-//   },
-//   greeting: {
-//     fontSize: 18,
-//     color: '#4B3E2A',
-//   },
-//   name: {
-//     fontWeight: 'bold',
-//     fontSize: 20,
-//     color: '#3E3E2A',
-//   },
-//   cardContainer: {
-//     gap: 15,
-//   },
-//   card: {
-//     backgroundColor: '#D9EAD3',
-//     borderRadius: 20,
-//     padding: 20,
-//     shadowColor: '#000',
-//     shadowOffset: { width: 0, height: 2 },
-//     shadowOpacity: 0.1,
-//     shadowRadius: 5,
-//     elevation: 3,
-//   },
-//   cardTitle: {
-//     fontSize: 18,
-//     fontWeight: 'bold',
-//     color: '#3E3E2A',
-//     marginBottom: 8,
-//   },
-//   cardText: {
-//     fontSize: 14,
-//     color: '#5F5F5F',
-//   },
-// });
-
-
-
-
-
-
-
-
-
-
-
-import React from 'react';
-import { View, Text, StyleSheet, Image, TouchableOpacity, ScrollView } from 'react-native';
-import { Ionicons, MaterialIcons, FontAwesome5 } from '@expo/vector-icons';
-
-const Dashboard = () => {
   return (
-    <ScrollView style={styles.container}>
-      {/* Header */}
-      <View style={styles.header}>
-        <Text style={styles.headerTitle}>Home</Text>
-        <Ionicons name="search" size={24} color="#3e3e2a" />
-      </View>
+    <>
+      <ScrollView style={styles.container}>
+        {/* Header */}
+        <View style={styles.header}>
+          <Image source={require('../assets/logo2.png')} style={styles.logo} />
+          <Text style={styles.headerTitle}>Home</Text>
+          <Ionicons name="search" size={24} color="#3e3e2a" />
+        </View>
 
-      {/* Banner */}
-      <View style={styles.banner}>
-        <Text style={styles.bannerText}>Introduction to Mental Health Issues</Text>
-        <Image source={require('../assets/banner.png')} style={styles.bannerImage} />
-      </View>
+        {/* Banner */}
+        <View style={styles.banner}>
+          <Text style={styles.bannerText}>Introduction to Mental Health Issues</Text>
+          <Image source={require('../assets/banner (2).png')} style={styles.bannerImage} />
+        </View>
 
-      {/* Mood Tracker */}
-      <Text style={styles.moodTitle}>How do you feel today?</Text>
-      <View style={styles.moodContainer}>
-        {['#EA4B48', '#F79E1B', '#5A5A5A', '#9DCB6D', '#50B66B'].map((color, index) => (
-          <TouchableOpacity key={index} style={[styles.moodButton, { backgroundColor: color }]} />
-        ))}
-      </View>
+        {/* Mood card */}
+        <View style={styles.moodCard}>
+          <Text style={styles.moodCardText}>How do you feel today?</Text>
+          <View style={styles.moodIconRow}>
+            {moods.map((item, index) => (
+              <TouchableOpacity key={index} onPress={() => setSelectedMood(item.label)}>
+                <Image source={item.icon} style={styles.moodIcon} />
+              </TouchableOpacity>
+            ))}
+          </View>
+          {selectedMood && (
+            <Text style={{ marginTop: 12, fontSize: 16, fontWeight: '600', color: '#3e3e2a' }}>
+              You feel: {selectedMood}
+            </Text>
+          )}
+        </View>
 
-      {/* Chat Options */}
-      <View style={styles.chatOptions}>
-        <TouchableOpacity style={styles.chatBox}>
-          <MaterialIcons name="smart-toy" size={28} color="#3e3e2a" />
-          <Text style={styles.chatText}>Chat with Mindy</Text>
+        {/* Chat options */}
+        <View style={styles.chatContainer}>
+          <TouchableOpacity style={styles.chatCard}  onPress={() => router.push('/MindyChat')}>
+            <Image source={require('../assets/robot.png')} style={styles.chatImage} />
+            <Text style={styles.chatText}>Chat with{'\n'}Mindy</Text>
+          </TouchableOpacity>
+          <TouchableOpacity style={styles.chatCard}>
+            <Image source={require('../assets/coach.png')} style={styles.chatImage} />
+            <Text style={styles.chatText}>Talk with{'\n'}Coach</Text>
+          </TouchableOpacity>
+        </View>
+
+        {/* Plans */}
+        <Text style={styles.planHeader}>Your plans for today (0/5)</Text>
+
+        <View style={styles.planCard}>
+          <View style={styles.planLine} />
+          <View style={styles.planContent}>
+            <Text style={styles.planTitle}>Intro to Meditation</Text>
+            <Text style={styles.planSubtitle}>8 mins</Text>
+          </View>
+          <Image source={require('../assets/yoga1.png')} style={styles.planImage} />
+        </View>
+
+        <View style={styles.planCard}>
+          <View style={styles.planLine} />
+          <View style={styles.planContent}>
+            <Text style={styles.planTitle}>Mindfulness Techniques to...</Text>
+            <Text style={styles.planSubtitle}>2 mins read</Text>
+          </View>
+          <Image source={require('../assets/doctor1.png')} style={styles.planImage} />
+        </View>
+      </ScrollView>
+
+      {/* Tab Bar */}
+      <View style={styles.tabBar}>
+        <TouchableOpacity style={styles.tabItem} onPress={() => router.push('/toolkit2')}>
+          <Ionicons name="home" size={26} style={[styles.tabIcon, styles.tabIconActive]} />
         </TouchableOpacity>
-        <TouchableOpacity style={styles.chatBox}>
-          <FontAwesome5 name="user-md" size={28} color="#3e3e2a" />
-          <Text style={styles.chatText}>Talk with Coach</Text>
+        <TouchableOpacity style={styles.tabItem} onPress={() => router.push('/voice')}>
+          <Feather name="compass" size={26} style={styles.tabIconInactive} />
+        </TouchableOpacity>
+        <TouchableOpacity style={styles.tabItem} onPress={() => router.push('/toolkit')}>
+          <Feather name="moon" size={26} style={styles.tabIconInactive} />
+        </TouchableOpacity>
+        <TouchableOpacity style={styles.tabItem} onPress={() => router.push('/mood')}>
+          <FontAwesome5 name="chart-line" size={24} style={styles.tabIconInactive} />
+        </TouchableOpacity>
+        <TouchableOpacity style={styles.tabItem}  onPress={() => router.push('/profile')} >
+          <Ionicons name="person" size={26} style={styles.tabIconInactive} />
         </TouchableOpacity>
       </View>
-
-      {/* Daily Plans */}
-      <Text style={styles.planTitle}>Your plans for today (0/5)</Text>
-      <View style={styles.planBox}>
-        <Text style={styles.planCategory}>Meditation</Text>
-        <Text style={styles.planTitleText}>Intro to Meditation</Text>
-        <Text style={styles.planTime}>8 mins</Text>
-      </View>
-
-      <View style={styles.planBox}>
-        <Text style={styles.planCategory}>Articles</Text>
-        <Text style={styles.planTitleText}>Mindfulness Techniques to...</Text>
-        <Text style={styles.planTime}>2 mins read</Text>
-      </View>
-
-      {/* Bottom Nav (Optional) */}
-      <View style={styles.bottomNav}>
-        <Ionicons name="home" size={24} color="#50B66B" />
-        <Ionicons name="call" size={24} color="#9DCB6D" />
-        <Ionicons name="calendar" size={24} color="#9DCB6D" />
-        <Ionicons name="person" size={24} color="#9DCB6D" />
-      </View>
-    </ScrollView>
+    </>
   );
 };
 
+export default Dashboard;
+
+
+
+
 const styles = StyleSheet.create({
   container: {
-    backgroundColor: '#fff',
-    padding: 16,
-    paddingTop: 50,
+    flex: 1,
+    // backgroundColor: '#F9F8F4',
+    backgroundColor: '#FEFFE8',
+    paddingHorizontal: 16,
   },
   header: {
     flexDirection: 'row',
     justifyContent: 'space-between',
     alignItems: 'center',
+    paddingTop: 20,
+    paddingBottom: 10,
   },
   headerTitle: {
-    fontSize: 22,
-    fontWeight: 'bold',
-    color: '#3e3e2a',
+        fontSize: 22,
+        fontWeight: 'bold',
+        color: '#3e3e2a',
+      },
+  logo: {
+    width: 50,
+    height: 50,
+    resizeMode: 'contain',
   },
   banner: {
-    marginVertical: 20,
-    backgroundColor: '#D2E6C8',
-    borderRadius: 12,
-    padding: 16,
-    flexDirection: 'row',
-    alignItems: 'center',
-  },
-  bannerText: {
-    flex: 1,
-    color: '#3e3e2a',
-    fontWeight: 'bold',
+        marginVertical: 20,
+        backgroundColor: '#CAE675',
+        borderRadius: 12,
+        padding: 16,
+        flexDirection: 'row',
+        alignItems: 'center',
+      },
+      bannerText: {
+        flex: 1,
+        color: '#3e3e2a',
+        fontWeight: 'bold',
+        fontSize: 19,
+      },
+      bannerImage: {
+        width: 150,
+        height: 100,
+        resizeMode: 'cover',
+      },
+  moodPrompt: {
     fontSize: 16,
+    fontWeight: '700',
+    color: '#333',
+    marginBottom: 12,
   },
-  bannerImage: {
+  chatContainer: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    marginBottom: 28,
+  },
+  chatCard: {
+    width: '48%',
+    backgroundColor: '#fff',
+    borderRadius: 16,
+    paddingVertical: 16,
+    paddingHorizontal: 12,
+    alignItems: 'center',
+    elevation: 4,
+  },
+  chatImage: {
+    width: 60,
+    height: 60,
+    resizeMode: 'cover',
+    marginBottom: 8,
+  },
+  chatText: {
+    textAlign: 'center',
+    fontWeight: '600',
+    fontSize: 14,
+    color: '#333',
+  },
+  planHeader: {
+    fontSize: 17,
+    fontWeight: '700',
+    color: '#333',
+    marginBottom: 12,
+  },
+  planCard: {
+    flexDirection: 'row',
+    backgroundColor: '#fff',
+    borderRadius: 16,
+    padding: 12,
+    alignItems: 'center',
+    marginBottom: 16,
+    elevation: 2,
+  },
+  planLine: {
+    width: 6,
+    height: 6,
+    borderRadius: 3,
+    backgroundColor: '#9BCF53',
+    marginRight: 10,
+  },
+  planContent: {
+    flex: 1,
+  },
+  planTitle: {
+    fontSize: 16,
+    fontWeight: '700',
+    color: '#333',
+    marginBottom: 4,
+  },
+  planSubtitle: {
+    fontSize: 14,
+    color: '#999',
+  },
+  planImage: {
     width: 80,
     height: 80,
     resizeMode: 'contain',
   },
-  moodTitle: {
-    fontSize: 16,
-    fontWeight: 'bold',
-    marginVertical: 10,
-    color: '#3e3e2a',
-  },
-  moodContainer: {
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    marginBottom: 20,
-  },
-  moodButton: {
-    width: 40,
-    height: 40,
-    borderRadius: 20,
-  },
-  chatOptions: {
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-  },
-  chatBox: {
-    flex: 1,
-    backgroundColor: '#F4F4F4',
-    padding: 16,
-    marginHorizontal: 5,
-    borderRadius: 12,
+  moodCard: {
+    backgroundColor: '#fff',
+    borderRadius: 16,
+    paddingVertical: 20,
+    paddingHorizontal: 12,
     alignItems: 'center',
+    shadowColor: '#000',
+    shadowOpacity: 0.05,
+    shadowRadius: 8,
+    elevation: 3,
+    marginBottom: 24,
   },
-  chatText: {
-    marginTop: 8,
-    fontWeight: '500',
-    color: '#3e3e2a',
+  
+  moodCardText: {
+    fontSize: 17,
+    fontWeight: '700',
+    color: '#333',
+    marginBottom: 16,
     textAlign: 'center',
   },
-  planTitle: {
-    marginVertical: 20,
-    fontWeight: 'bold',
-    fontSize: 16,
-    color: '#3e3e2a',
+  
+  moodIconRow: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    width: '100%',
+    paddingHorizontal: 10,
   },
-  planBox: {
-    backgroundColor: '#F9F9F9',
-    borderRadius: 12,
-    padding: 16,
-    marginBottom: 12,
+  
+  moodIcon: {
+    width: 50,
+    height: 50,
+    resizeMode: 'cover',
   },
-  planCategory: {
-    fontSize: 12,
-    color: '#50B66B',
-    marginBottom: 4,
-  },
-  planTitleText: {
-    fontSize: 16,
-    fontWeight: 'bold',
-    color: '#3e3e2a',
-  },
-  planTime: {
-    fontSize: 12,
-    color: '#7a7a7a',
-  },
-  bottomNav: {
+  tabBar: {
     flexDirection: 'row',
     justifyContent: 'space-around',
-    marginTop: 30,
-    paddingVertical: 10,
-    borderTopColor: '#eee',
-    borderTopWidth: 1,
+    alignItems: 'center',
+    backgroundColor: '#fff',
+    paddingVertical: 12,
+    borderTopLeftRadius: 16,
+    borderTopRightRadius: 16,
+    elevation: 10,
+    marginTop: 8,
   },
+  
+  tabItem: {
+    alignItems: 'center',
+    flex: 1,
+  },
+  
+  tabIcon: {
+    color: '#9BCF53',
+  },
+  
+  tabIconActive: {
+    color: '#9BCF53',
+  },
+  
+  tabIconInactive: {
+    color: '#ccc',
+  },
+  moodLabel: {
+    marginTop: 12,
+    fontSize: 16,
+    color: '#555',
+  },
+  
+  
+  
 });
-
-export default Dashboard;
